@@ -1,0 +1,95 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+<metal:block fill-slot="head_slot">
+       <meta http-equiv="refresh" content="900" >
+
+    </metal:block>
+<body>
+
+<metal:content-core fill-slot="content-core">
+<metal:block use-macro="context/standard_view/macros/content-core">
+
+    <metal:entries fill-slot="entries">
+    <metal:block use-macro="context/standard_view/macros/entries">
+    <metal:entry fill-slot="entry">
+
+        <div class="tileItem visualIEFloatFix"
+             tal:define="obj item/getObject">
+            <a href="#"
+                  tal:condition="obj/image|nothing"
+                  tal:attributes="href item/getURL">
+                  <div class="tileImage">
+                      <img src="" alt=""
+                           tal:define="scales obj/@@images;
+                                       scale python:scales.scale('image', 'thumb')"
+                           tal:replace="structure python:scale and scale.tag(css_class='tileImage') or None" />
+                  </div>
+            </a>
+
+            <h2 class="tileHeadline" metal:define-macro="listitem">
+                <a href="#"
+                   class="summary url"
+                   tal:attributes="href python:item_type in use_view_action and item_url+'/view' or item_url;"
+                   tal:content="item/Title">
+                    Item Title
+                </a>
+            </h2>
+
+            <div metal:use-macro="context/standard_view/macros/document_byline"></div>
+
+            <p class="tileBody" tal:condition="item_description">
+                <span class="description" tal:content="item_description">
+                    description
+                </span>
+            </p>
+			<p class="tileBody bodyText" tal:condition="obj/text">
+				<span class="bodytext" tal:content="obj/text">
+					Body Text
+				</span>
+			</p>
+			<nav i18n:domain="plone"
+			     id="category"
+			     class="documentByLine"
+			     role="navigation"
+			     tal:define="categories context/Subject|nothing;
+			                 url_quote  nocall:modules/Products.PythonScripts.standard/url_quote;"
+			     tal:condition="categories">
+			  <span id="categories-filed-under"><tal:filedunder i18n:translate="label_area">Area</tal:filedunder></span>
+			  <ul aria-labelledby="categories-filed-under">
+			    <li tal:repeat="category categories">
+			      <a href=""
+			         class="link-category"
+			         rel="tag"
+			         tal:content="category"
+			         tal:define="quotedCat python:url_quote(category)"
+			         tal:attributes="href string:${context/@@plone_portal_state/navigation_root_url}/@@search?Subject%3Alist=${quotedCat}">
+			        Category
+			        </a>
+			    </li>
+			  </ul>
+			</nav>
+            <p class="tileFooter">
+                <a href=""
+                   tal:attributes="href python:item_type in use_view_action and item_url+'/view' or item_url;">
+                    <span class="hiddenStructure"><span tal:replace="item/Title" /> - </span>
+                    
+                </a>
+            </p>
+
+            <div class="visualClear"><!-- --></div>
+        </div>
+
+    </metal:entry>
+    </metal:block>
+    </metal:entries>
+
+</metal:block>
+</metal:content-core>
+
+</body>
+</html>

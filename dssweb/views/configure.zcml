@@ -1,0 +1,19 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:faceted="http://namespaces.zope.org/faceted"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="dssweb.views">
+
+  <!-- five:registerPackage package="." initialize=".initialize" / -->
+
+
+  <browser:page
+    name="collection-kiosk-refresh"
+    template="kiosk.collection-refresh.pt"
+    title="kiosk collection view"
+    permission="zope2.View"
+    />
+  
+
+</configure>

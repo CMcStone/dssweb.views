@@ -1,19 +1,24 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
-    xmlns:faceted="http://namespaces.zope.org/faceted"
+	xmlns:five="http://namespaces.zope.org/five"
+	    xmlns:i18n="http://namespaces.zope.org/i18n"
+	    xmlns:cmf="http://namespaces.zope.org/cmf"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="dssweb.views">
 
-  <!-- five:registerPackage package="." initialize=".initialize" / -->
+  <include package="browser" />
+  <include package="plone.resource" file="meta.zcml"/>
+  <five:registerPackage package="." initialize=".initialize" />
+  
+  <genericsetup:registerProfile
+            name="default"
+            title="dssweb.views"
+            directory="profiles/default"
+            description="Installs the dssweb.views package"
+            provides="Products.GenericSetup.interfaces.EXTENSION"
+            />
 
-
-  <browser:page
-    name="collection-kiosk-refresh"
-    template="kiosk.collection-refresh.pt"
-    title="kiosk collection view"
-    permission="zope2.View"
-    />
   
 
 </configure>

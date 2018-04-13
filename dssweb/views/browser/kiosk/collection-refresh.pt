@@ -5,6 +5,13 @@
       lang="en"
       metal:use-macro="here/main_template/macros/master"
       i18n:domain="plone">
+    
+<metal:block fill-slot="style_slot">
+        <link rel="stylesheet" type="text/css"
+            tal:define="navroot context/@@plone_portal_state/navigation_root_url"
+            tal:attributes="href string:${navroot}/++resource++dssweb.view.kiosk/kiosk.css"
+            />
+    </metal:block>
 <metal:block fill-slot="head_slot">
        <meta http-equiv="refresh" content="900" >
 
@@ -43,12 +50,12 @@
             <div metal:use-macro="context/standard_view/macros/document_byline"></div>
 
             <p class="tileBody" tal:condition="item_description">
-                <span class="description" tal:content="item_description">
+                <span class="description kiosk-description" tal:content="item_description">
                     description
                 </span>
             </p>
-			<p class="tileBody bodyText" tal:condition="obj/text">
-				<span class="bodytext" tal:content="obj/text">
+			<p class="tileBody bodyText" tal:define="text python:obj.getText()" tal:condition="text">
+				<span class="bodytext" tal:replace="structure text">
 					Body Text
 				</span>
 			</p>
@@ -56,22 +63,22 @@
 			     id="category"
 			     class="documentByLine"
 			     role="navigation"
-			     tal:define="categories context/Subject|nothing;
+			     tal:define="categories obj/Subject|nothing;
 			                 url_quote  nocall:modules/Products.PythonScripts.standard/url_quote;"
 			     tal:condition="categories">
-			  <span id="categories-filed-under"><tal:filedunder i18n:translate="label_area">Area</tal:filedunder></span>
-			  <ul aria-labelledby="categories-filed-under">
-			    <li tal:repeat="category categories">
+			  <span id="categories-kiosk"><tal:filedunder i18n:translate="label_area">Area(s): </tal:filedunder></span>
+			  <p aria-labelledby="categories-kiosk">
+			    <span class="category-kiosk" tal:repeat="category categories">
 			      <a href=""
-			         class="link-category"
+			         class="link-category category-kiosk"
 			         rel="tag"
 			         tal:content="category"
 			         tal:define="quotedCat python:url_quote(category)"
 			         tal:attributes="href string:${context/@@plone_portal_state/navigation_root_url}/@@search?Subject%3Alist=${quotedCat}">
 			        Category
 			        </a>
-			    </li>
-			  </ul>
+				</span>
+			  </p>
 			</nav>
             <p class="tileFooter">
                 <a href=""

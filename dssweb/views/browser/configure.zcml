@@ -5,17 +5,20 @@
   
   <browser:page
     name="collection-kiosk-refresh"
-    template="kiosk.collection-refresh.pt"
-    title="kiosk collection view"
+    template="kiosk/collection-refresh.pt"
 	for="plone.app.collection.interfaces.ICollection"
     permission="zope2.View"
     />
 	
+  <browser:resourceDirectory
+    name="dssweb.views.kiosk"
+    directory="kiosk/static" />
+	
 <browser:menuItem
         for="plone.app.collection.interfaces.ICollection"
         menu="plone_displayviews"
-        title="Kiosk view"
-        action="collection-kiosk-refresh"
+        title="kiosk colletion view"
+        action="@@collection-kiosk"
         description="Refreshing collection kiosk view"
 		  />
 		  

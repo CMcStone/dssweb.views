@@ -7,7 +7,7 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="dssweb.views">
 
-  <include package="browser" />
+  <include package=".browser" />
   <include package="plone.resource" file="meta.zcml"/>
   <five:registerPackage package="." initialize=".initialize" />
   

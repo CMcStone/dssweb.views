@@ -2,5 +2,6 @@
 <object name="Collection">
  <property name="view_methods" purge="False">
   <element value="collection-kiosk-refresh"/>
+  <element value="query-page" />
  </property>
 </object>

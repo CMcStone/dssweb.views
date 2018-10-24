@@ -9,10 +9,20 @@
 	for="plone.app.collection.interfaces.ICollection"
     permission="zope2.View"
     />
+  <browser:page
+    name="query-page"
+    template="queryPage/query-page.pt"
+	for="plone.app.collection.interfaces.ICollection"
+    permission="zope2.View"
+    />
 	
   <browser:resourceDirectory
     name="dssweb.views.kiosk"
     directory="kiosk/static" />
+	
+  <browser:resourceDirectory
+    name="dssweb.views.queryPage"
+    directory="queryPage/static" />
 	
 <browser:menuItem
         for="plone.app.collection.interfaces.ICollection"
@@ -22,4 +32,11 @@
         description="Refreshing collection kiosk view"
 		  />
 		  
+<browser:menuItem
+        for="plone.app.collection.interfaces.ICollection"
+        menu="plone_displayviews"
+        title="query page collection view"
+        action="@@collection-query-page"
+        description="Single page view for collection"
+		  />
 </configure>

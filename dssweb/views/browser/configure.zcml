@@ -39,4 +39,8 @@
         action="@@collection-query-page"
         description="Single page view for collection"
 		  />
+		  
+ <browser:jbot
+    directory="overrides"
+  />
 </configure>

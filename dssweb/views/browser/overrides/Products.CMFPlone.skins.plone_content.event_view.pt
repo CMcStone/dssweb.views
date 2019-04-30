@@ -1,0 +1,226 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+<body>
+
+<metal:content-core fill-slot="content-core">
+    <metal:content-core define-macro="content-core"
+                        tal:define="kssClassesView context/@@kss_field_decorator_view;
+                                    getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
+                                    templateId template/getId;
+                                    toLocalizedTime nocall:context/@@plone/toLocalizedTime;">
+
+        <div class="eventDetails vcard">
+            <div class="vertical-listing"
+                   summary="Event details" i18n:attributes="summary summary_event_details;">
+
+                <div id="event-body" class="zebra rows">
+
+                   
+                        <div id="event-datetime" class="row">
+								<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 popup-nocol">
+									<h3 class="uc">Date &amp; Time</h3>
+								</div>
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 popup-nocol">
+                                                                   <p>
+									
+								
+				   
+                        
+                            <tal:differentday tal:condition="python:not context.start().Date() == context.end().Date()"
+                                              i18n:translate="event_when_differentday">
+                                <abbr i18n:name="startdate"
+                                      metal:define-macro="startdate-field-view"
+                                      tal:define="kss_class python:getKssClasses('startDate',
+                                                  templateId=templateId, macro='startdate-field-view');"
+                                      id="parent-fieldname-startDate"
+                                      tal:attributes="class string:$kss_class dtstart;
+                                                      title python:context.start().ISO8601()">
+                                  <span metal:define-slot="inside" class="explain">
+                                    <span tal:replace="python:toLocalizedTime(context.start())">Start Date</span>
+                                    <tal:word i18n:translate="event_when_differentday_optional_word_between_date_and_time" />
+                                    <span tal:replace="python:toLocalizedTime(context.start(), time_only=1)">Start Time</span>
+                                  </span>
+                                </abbr>
+                                to
+                                <br i18n:name="linebreak" />
+                                <abbr i18n:name="enddate"
+                                      metal:define-macro="enddate-field-view"
+                                      tal:define="kss_class python:getKssClasses('endDate',
+                                                  templateId=templateId, macro='enddate-field-view');"
+                                      id="parent-fieldname-endDate"
+                                      tal:attributes="class string:$kss_class dtend;
+                                                      title python:context.end().ISO8601()">
+                                   <span metal:define-slot="inside" class="explain">
+                                     <span tal:replace="python:toLocalizedTime(context.end())">End Date</span>
+                                     <tal:word i18n:translate="event_when_differentday_optional_word_between_date_and_time" />
+                                     <span tal:replace="python:toLocalizedTime(context.end(), time_only=1)">End Time</span>
+                                  </span>
+                                </abbr>
+                            </tal:differentday>
+
+                            <tal:sameday tal:condition="python:context.start().Date() == context.end().Date()"
+                                         i18n:translate="event_when_sameday">
+                                <span tal:replace="python:toLocalizedTime(context.start())"
+                                      i18n:name="date">
+                                    Start Date Time</span>
+                                <br i18n:name="linebreak" />
+                                from
+                                <abbr metal:define-macro="startdatesame-field-view"
+                                      tal:define="kss_class python:getKssClasses('startDate',
+                                                  templateId=templateId, macro='startdatesame-field-view');"
+                                      id="parent-fieldname-startDate"
+                                      tal:attributes="class string:$kss_class dtstart;
+                                                      title python:context.start().ISO8601()"
+                                      i18n:name="starttime">
+                                      <span metal:define-slot="inside"
+                                            class="explain"
+                                            tal:content="python:toLocalizedTime(context.start(), time_only=1)">Start Time</span>
+                                </abbr> to
+                                <abbr metal:define-macro="enddatesame-field-view"
+                                      tal:define="kss_class python:getKssClasses('endDate',
+                                                  templateId=templateId, macro='enddatesame-field-view');"
+                                      id="parent-fieldname-endDate"
+                                      tal:attributes="class string:$kss_class dtend;
+                                                      title python:context.end().ISO8601()"
+                                      i18n:name="endtime">
+                                      <span metal:define-slot="inside"
+                                            class="explain"
+                                            tal:content="python:toLocalizedTime(context.end(), time_only=1)">End Time</span>
+                                </abbr>
+                            </tal:sameday>
+						</p>
+                                              </div>
+                                              </div>
+                                               <div id="event-location" class="row">
+                                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 popup-nocol" tal:condition="context/location">
+						
+							 
+						                        <h3 class="uc" i18n:translate="event_where">Location</h3>
+										
+						                                     </div>
+                                               <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 popup-nocol">
+						                            <p class="location">
+														<metal:field use-macro="python:context.widget('location', mode='view')">
+						                            Location
+						                            </metal:field>
+												</p>
+												</div>
+                                                        </div>
+						<div tal:condition="python:context.getText()" id="event-description" class="row">
+								<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 popup-nocol">
+									<h3 class="uc">Description</h3>
+								</div>
+								<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 popup-nocol">
+									<div class="inline-content">
+                                                        
+                                                         <metal:field use-macro="python:context.widget('text', mode='view')">
+                                                                   Body text
+                                                                                   </metal:field>
+									</div>
+								</div>
+                                                                </div>
+                                                           
+							<!-- /.row -->
+                            <div id="event-contact" class="row">
+	                                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 popup-nocol">
+						  <h3 class="uc">Contact Name</h3>
+						</div>
+					     <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 popup-nocol">
+							<div tal:define="contact_email context/contact_email;
+                                                              contact_name python:context.contact_name() or None;"
+                                                                         tal:condition="python:contact_name or contact_email">
+                        
+                                                          <a id="parent-fieldname-contactEmail"
+                                                                 tal:condition="contact_email"
+                                                                 tal:replace="structure python: context.spamProtect(mailaddress=contact_email, mailname=contact_name, cssclass='email fn')"
+                                                              />
+                                                        <span class="fn"
+                                                               tal:condition="not: contact_email"
+                                                               tal:content="contact_name" />
+                                                      </div>
+                        
+                    
+                                                      <div tal:condition="context/contact_phone">
+                    
+                                                          <metal:field use-macro="python:context.widget('contactPhone', mode='view')">
+                                                               Phone number
+                                                          </metal:field>
+                                                         </div>
+								
+                                                  </div>
+                                             </div><!-- /.row-->
+                            <div id="event-url" class="row">
+                                              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 popup-nocol" tal:condition="context/event_url|nothing">
+		                                     <h3 class="uc" >More Details</h3>
+					        </div>
+                                               <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 popup-nocol">
+						          <a class="url"
+                                                             href="event_url"
+                                                             i18n:translate="event_more_information"
+                                                             tal:define="field python:context.getField('eventUrl');"
+                                                             id="parent-fieldname-eventUrl"
+                                                             tal:attributes="href context/event_url">
+                                                            More information about this event&hellip;</a>
+												
+						</div>
+                                                </div><!--row -->
+                            <div id="attendees" class="row">
+                                              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 popup-nocol" tal:condition="context/getAttendees|nothing">
+		                                     <h3 class="uc" i18n:translate="contact_attendees">Attendees</h3>
+					        </div>
+                                               <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 popup-nocol">
+						          <metal:field use-macro="python:context.widget('attendees', mode='view')">
+                                                                    Attendees
+                                                              </metal:field>
+												
+						</div>
+                                                </div><!--row -->
+                                             <div id="event-cta" class="row" tal:define="here_url context/@@plone_context_state/object_url;portal context/@@plone_portal_state/portal;">
+													<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 popup-nocol">
+														<h3 class="uc">&nbsp;</h3>
+													</div>
+													<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 popup-nocol">
+														
+														<ul class="portlet-thingies">
+															<li id="ical-vcal"><a href="#"
+                               tal:attributes="href string:$here_url/ics_view"
+                               title="Download this event in iCal format"
+                               i18n:attributes="title title_add_to_ical;">
+                                 <img tal:attributes="src string:${context/@@plone_portal_state/portal_url}/icon_export_ical.png" alt="Export to Ical" title="iCal Export" />
+                                
+                                <span i18n:translate="label_add_to_ical">iCal Export</span></a></li>
+															<li class="hidden-sm" id="ical-vcal"> <a href="#"
+                               tal:attributes="href string:$here_url/vcs_view"
+                               title="Download this event in vCal format"
+                               i18n:attributes="title title_add_to_vcal;">
+                                <img tal:attributes="src string:${context/@@plone_portal_state/portal_url}/icon_export_vcal.png" alt="Export to vcal" title="vCal Export" />
+                                <span i18n:translate="label_add_to_vcal">vCal Export</span></a></li>
+															
+														</ul>
+													</div>
+												</div><!-- /.row -->
+                                                                  
+										
+					</div>
+						
+                        
+                   </div>
+                    
+        </div>
+
+        
+
+        
+
+        <span class="visualClear"><!-- --></span>
+
+    </metal:content-core>
+</metal:content-core>
+
+</body>
+</html>

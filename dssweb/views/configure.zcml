@@ -19,6 +19,8 @@
             description="Installs the dssweb.views package"
             provides="Products.GenericSetup.interfaces.EXTENSION"
             />
+			
+ 
 
   
 

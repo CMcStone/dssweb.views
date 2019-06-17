@@ -8,6 +8,7 @@
     i18n_domain="dssweb.views">
 
   <include package=".browser" />
+  <include package=".portletCollectionNoData" />
   <include package="plone.resource" file="meta.zcml"/>
   <five:registerPackage package="." initialize=".initialize" />
   
@@ -18,6 +19,8 @@
             description="Installs the dssweb.views package"
             provides="Products.GenericSetup.interfaces.EXTENSION"
             />
+			
+ 
 
   
 

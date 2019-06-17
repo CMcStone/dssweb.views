@@ -52,7 +52,7 @@
         </a>
     </dd>
     </tal:events>
-	<div tal:condition="python:noCollData < 1">
+	<div tal:omit-tag tal:condition="python:noCollData < 1">
     <dd tal:condition="view/data/text" class="portletItem odd">
            <div tal:replace="structure view/data/text" />
            

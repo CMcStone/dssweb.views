@@ -84,6 +84,10 @@ class Renderer(collection.Renderer):
     @property
     def available(self):
         return True
+    
+    def noCollData(self):
+        return len(self.results())
+        
 
     def tag(self, obj, css_class='tileImage'):
         context = aq_inner(obj)

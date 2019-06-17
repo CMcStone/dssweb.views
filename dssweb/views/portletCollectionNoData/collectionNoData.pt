@@ -6,7 +6,8 @@
                 toLocalizedTime nocall:plone_view/toLocalizedTime;
                 viewActions here/portal_properties/site_properties/typesUseViewActionInListings|python:();
                 getIcon nocall:plone_view/getIcon;
-                portlet_id context/data/id|string:id1"
+                portlet_id context/data/id|string:id1;
+				noCollData view/noCollData;"
     tal:attributes="class string:portlet portletContentLeadImageCollectionPortlet ${portlet_id}">
 
     <dt class="portletHeader">
@@ -51,10 +52,12 @@
         </a>
     </dd>
     </tal:events>
+	<div tal:condition="python:noCollData < 1">
     <dd tal:condition="view/data/text" class="portletItem odd">
            <div tal:replace="structure view/data/text" />
            
        </dd>
+   </div>
 
     <dd class="portletFooter" tal:condition="view/data/show_more">
         <span class="portletBottomLeft"></span>

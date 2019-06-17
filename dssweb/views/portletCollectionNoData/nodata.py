@@ -1,10 +1,13 @@
 from zope.interface import implements
+from Products.CMFCore.utils import getToolByName
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.app.portlets.portlets import base
+from zope.component import getUtility
 from zope import schema
 from zope.formlib import form
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Acquisition import aq_inner
+import logging
 
 from dssweb.views.portletCollectionNoData import portletCollectionNoDataMessageFactory as _
 
@@ -14,6 +17,8 @@ from plone.app.form.widgets.wysiwygwidget import WYSIWYGWidget
 
 from collective.contentleadimage.config import IMAGE_FIELD_NAME
 from collective.contentleadimage.config import IMAGE_CAPTION_FIELD_NAME
+
+logger = logging.getLogger('dssweb.views.portletCollectionNoData')
 
 
 class IContentLeadImageCollectionNdPortlet(collection.ICollectionPortlet):
@@ -75,6 +80,10 @@ class Renderer(collection.Renderer):
 
     def __init__(self, *args):
         base.Renderer.__init__(self, *args)
+    
+    @property
+    def available(self):
+        return True
 
     def tag(self, obj, css_class='tileImage'):
         context = aq_inner(obj)

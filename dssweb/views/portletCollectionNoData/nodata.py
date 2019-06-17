@@ -10,6 +10,7 @@ from dssweb.views.portletCollectionNoData import portletCollectionNoDataMessageF
 
 from plone.portlet.collection import collection
 from plone.app.form.widgets.uberselectionwidget import UberSelectionWidget
+from plone.app.form.widgets.wysiwygwidget import WYSIWYGWidget
 
 from collective.contentleadimage.config import IMAGE_FIELD_NAME
 from collective.contentleadimage.config import IMAGE_CAPTION_FIELD_NAME
@@ -50,6 +51,7 @@ class Assignment(collection.Assignment):
 
     start_dates = False
     scale = 'thumb'
+    text = u""
 
     def __init__(self, header=u"", target_collection=None, limit=None,
                  random=False, show_more=True, show_dates=False,
@@ -141,6 +143,7 @@ class AddForm(base.AddForm):
     """
     form_fields = form.Fields(IContentLeadImageCollectionNdPortlet)
     form_fields['target_collection'].custom_widget = UberSelectionWidget
+    form_fields['text'].custom_widget = WYSIWYGWidget
 
     label = _(u"Add ContentLeadImage NoData Collection Portlet")
     description = _(u"This portlet display a listing of items's contentleadimages from a Collection.")
@@ -155,6 +158,7 @@ class EditForm(base.EditForm):
     """
     form_fields = form.Fields(IContentLeadImageCollectionNdPortlet)
     form_fields['target_collection'].custom_widget = UberSelectionWidget
+    form_fields['text'].custom_widget = WYSIWYGWidget
 
     label = _(u"Edit ContentLeadImage Collection Portlet")
     description = _(u"This portlet display a listing of items's contentleadimages from a Collection and shows fallback text if the collection returns no data.")

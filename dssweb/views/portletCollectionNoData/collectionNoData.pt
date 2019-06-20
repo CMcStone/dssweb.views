@@ -52,12 +52,12 @@
         </a>
     </dd>
     </tal:events>
-	<div tal:omit-tag tal:condition="python:noCollData < 1">
+	<tal:noevents tal:condition="python:noCollData < 1">
     <dd tal:condition="view/data/text" class="portletItem odd">
            <div tal:replace="structure view/data/text" />
            
        </dd>
-   </div>
+   </tal:noevents>
 
     <dd class="portletFooter" tal:condition="view/data/show_more">
         <span class="portletBottomLeft"></span>

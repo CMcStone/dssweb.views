@@ -23,7 +23,7 @@
                    
                         <div id="event-datetime" class="row">
 								<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 popup-nocol">
-									<h3 class="uc">Date &amp; Time</h3>
+									<h3 class="uc pop-fix">Date &amp; Time</h3>
 								</div>
 								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 popup-nocol">
                                                                    <p>
@@ -100,7 +100,7 @@
                                                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 popup-nocol" tal:condition="context/location">
 						
 							 
-						                        <h3 class="uc" i18n:translate="event_where">Location</h3>
+						                        <h3 class="uc pop-fix" i18n:translate="event_where">Location</h3>
 										
 						                                     </div>
                                                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 popup-nocol">
@@ -113,7 +113,7 @@
                                                         </div>
 						<div tal:condition="python:context.getText()" id="event-description" class="row">
 								<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 popup-nocol">
-									<h3 class="uc">Description</h3>
+									<h3 class="uc pop-fix">Description</h3>
 								</div>
 								<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 popup-nocol">
 									<div class="inline-content">
@@ -128,7 +128,7 @@
 							<!-- /.row -->
                             <div id="event-contact" class="row">
 	                                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 popup-nocol">
-						  <h3 class="uc">Contact Name</h3>
+						  <h3 class="uc pop-fix">Contact Name</h3>
 						</div>
 					     <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 popup-nocol">
 							<div tal:define="contact_email context/contact_email;
@@ -156,7 +156,7 @@
                                              </div><!-- /.row-->
                             <div id="event-url" class="row">
                                               <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 popup-nocol" tal:condition="context/event_url|nothing">
-		                                     <h3 class="uc" >More Details</h3>
+		                                     <h3 class="uc pop-fix" >More Details</h3>
 					        </div>
                                                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 popup-nocol">
 						          <a class="url"
@@ -171,7 +171,7 @@
                                                 </div><!--row -->
                             <div id="attendees" class="row">
                                               <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 popup-nocol" tal:condition="context/getAttendees|nothing">
-		                                     <h3 class="uc" i18n:translate="contact_attendees">Attendees</h3>
+		                                     <h3 class="uc pop-fix" i18n:translate="contact_attendees">Attendees</h3>
 					        </div>
                                                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 popup-nocol">
 						          <metal:field use-macro="python:context.widget('attendees', mode='view')">
@@ -182,7 +182,7 @@
                                                 </div><!--row -->
                                              <div id="event-cta" class="row" tal:define="here_url context/@@plone_context_state/object_url;portal context/@@plone_portal_state/portal;">
 													<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 popup-nocol">
-														<h3 class="uc">&nbsp;</h3>
+														<h3 class="uc pop-fix">&nbsp;</h3>
 													</div>
 													<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 popup-nocol">
 														
